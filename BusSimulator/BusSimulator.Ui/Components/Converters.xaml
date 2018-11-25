@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:c="clr-namespace:BusSimulator.Ui.Converters"
+                    xmlns:local="clr-namespace:BusSimulator.Ui.Components">
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    <c:IsLastItemConverter x:Key="LastItemConverter"/>
+    <c:BooleanToFontBoldConverter x:Key="BoolToFontWeightConverter"/>
+    <c:NegatingConverter x:Key="NegatingConverter"/>
+    <c:MatrixColorConverter x:Key="MatrixColorConverter"/>
+    <c:BooleanInverterConverter x:Key="InverseBoolConverter"/>
+    <c:TimeToDateTimeConverter x:Key="TimeToDateTimeConverter"/>
+</ResourceDictionary>

@@ -1,0 +1,115 @@
+﻿<Window x:Class="BusSimulator.Ui.DriveWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BusSimulator.Ui"
+        xmlns:com="clr-namespace:BusSimulator.Ui.Components"
+        mc:Ignorable="d"
+        Height="310" Width="300" AllowsTransparency="True" WindowStyle="None" Background="Transparent" Topmost="True" ResizeMode="CanResize" 
+        FontFamily="Calibri" FontSize="15" 
+        Loaded="Window_Loaded" Unloaded="Window_Unloaded"
+        DataContext="{Binding Drive, Source={StaticResource Locator}}" Title="Driving" MinHeight="310" MinWidth="300" MaxWidth="300">
+    <Grid>
+        <Border Background="{DynamicResource BackgroundBrush}" CornerRadius="15" Margin="0,0,0,10">
+            <Grid>
+                <!--Current time-->
+                <Label Content="{Binding Time}" Margin="46,0,0,0" VerticalAlignment="Bottom" Height="30" VerticalContentAlignment="Center" Foreground="{DynamicResource InformationForegroundBrush}" HorizontalAlignment="Left" Width="65"/>
+
+                <!--Time left-->
+                <Label Content="{Binding TimeLeft}" VerticalAlignment="Bottom" Height="30" VerticalContentAlignment="Center" Foreground="{DynamicResource InformationForegroundBrush}" Margin="157,0,91,0" FontWeight="{Binding IsLeftTimeAtStop, Converter={StaticResource BoolToFontWeightConverter}}"/>
+
+                <!--Current delay-->
+                <Label Content="{Binding Delay}" VerticalAlignment="Bottom" Height="30" VerticalContentAlignment="Center" Foreground="{DynamicResource InformationForegroundBrush}" HorizontalAlignment="Right" Width="35" Margin="0,0,10,0"/>
+
+                <!--Line information: Symbol, Destination and running text-->
+                <Border Background="{DynamicResource LineDisplayBackgroundBrush}" CornerRadius="15,15,0,0" Margin="0,0,0,0" Height="70" VerticalAlignment="Top">
+                    <Grid Margin="7.5,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.Resources>
+                            <Style TargetType="Label">
+                                <Setter Property="Foreground" Value="{Binding Options.Overlay.MatrixColor, Converter={StaticResource MatrixColorConverter}}"/>
+                            </Style>
+                        </Grid.Resources>
+
+                        <!--Line symbol-->
+                        <Label Content="{Binding LineSymbol}" VerticalContentAlignment="Center" FontSize="20" FontFamily="{StaticResource LedBoardFont}"/>
+
+                        <!--Line destination-->
+                        <Label Content="{Binding LineDestination}" VerticalContentAlignment="Center" FontSize="20" Grid.Column="1" FontFamily="{StaticResource LedBoardFont}" HorizontalContentAlignment="Center"/>
+
+                        <!--Running text of line-->
+                        <com:RunningTextComponent Text="{Binding LineRunningText}" Grid.Row="1" Grid.ColumnSpan="2" Foreground="{Binding Options.Overlay.MatrixColor, Converter={StaticResource MatrixColorConverter}}"/>
+                    </Grid>
+                </Border>
+
+                <!--Upcoming stops list-->
+                <Grid Margin="0,70,0,30" Background="{DynamicResource ListBackgroundBrush}">
+                    <com:StopListComponent DataContext="{Binding HaltsView}" Foreground="{DynamicResource InformationForegroundBrush}"></com:StopListComponent>
+
+                    <!--Lock symbol-->
+                    <Grid Width="30" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Height="25" Visibility="{Binding IsPaused, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Rectangle Margin="0,5" Fill="{DynamicResource InformationBadgeBackgroundBrush}" Grid.Column="1"/>
+                            <Rectangle Margin="0,5" Fill="{DynamicResource InformationBadgeBackgroundBrush}" Grid.Column="3"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1" Height="30" Visibility="{Binding IsLocked, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Image Source="{StaticResource ImageIconLock}" Margin="5"/>
+                        </Grid>
+
+                        <TextBlock Grid.Row="2" Foreground="{StaticResource InformationForegroundBrush}" TextAlignment="Right" Text="{Binding LastTickTime, StringFormat=\{0\} ms}" FontSize="10" Visibility="{Binding Options.Overlay.ShowFrameCalculationTime, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="0,0,5,0"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!--Current time icon-->
+        <Border Background="{DynamicResource BackgroundBrush}" CornerRadius="23" HorizontalAlignment="Left" Width="46" Height="46" VerticalAlignment="Bottom">
+            <Border Background="{DynamicResource InformationBadgeBackgroundBrush}" CornerRadius="21" Width="42" Height="42">
+                <Grid>
+                    <Image Margin="5" Source="{StaticResource ImageIconTime}"></Image>
+                </Grid>
+            </Border>
+        </Border>
+
+
+        <!--Left time icon-->
+        <Border Background="{DynamicResource BackgroundBrush}" CornerRadius="23" HorizontalAlignment="Left" Width="46" Height="46" VerticalAlignment="Bottom" Margin="111,0,0,0">
+            <Border Background="{DynamicResource InformationBadgeBackgroundBrush}" CornerRadius="21" Width="42" Height="42">
+                <Grid>
+                    <Image Margin="3" Source="{StaticResource ImageIconTimeLeft}"></Image>
+                </Grid>
+            </Border>
+        </Border>
+
+        <!--Current delay icon-->
+        <Border Background="{DynamicResource BackgroundBrush}" CornerRadius="23" HorizontalAlignment="Right" Width="46" Height="46" VerticalAlignment="Bottom" Margin="0,0,45,0">
+            <Border Background="{DynamicResource InformationBadgeBackgroundBrush}" CornerRadius="21" Width="42" Height="42">
+                <Grid>
+                    <Image Margin="5" Source="{StaticResource ImageIconDelay}"></Image>
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</Window>

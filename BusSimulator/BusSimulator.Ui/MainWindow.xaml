@@ -1,0 +1,110 @@
+﻿<Window x:Class="BusSimulator.Ui.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xc="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:BusSimulator.Ui"
+        xmlns:com="clr-namespace:BusSimulator.Ui.Components"
+        mc:Ignorable="d"
+        Title="Bus Simulator - Start" Height="450" Width="800"
+        DataContext="{Binding Main, Source={StaticResource Locator}}" 
+        FontFamily="Calibri" FontSize="15" WindowStartupLocation="CenterScreen" 
+        Closing="Window_Closing">
+    <Grid>
+        <Grid Margin="0,10,10,10" HorizontalAlignment="Right" Width="300">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <GroupBox Header="Preview">
+                <com:StopListComponent DataContext="{Binding PreviewHaltsView}"/>
+            </GroupBox>
+            <Grid Grid.Row="1" Margin="0,5,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Settings" Margin="5,0,5,0" Command="{Binding SettingsCommand}"/>
+                <Button Grid.Column="1" Margin="5,0,5,0" Content="Drive" Command="{Binding StartCommand}"/>
+            </Grid>
+        </Grid>
+        <Grid Margin="10,10,315,10">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <GroupBox Header="Line">
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <ListBox ItemsSource="{Binding LineDirectionsView}" IsSynchronizedWithCurrentItem="True">
+                        <ListBox.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.HeaderTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Margin="5,0,0,0" Source="{StaticResource ImageIconBus}" Width="15" Height="15"/>
+
+                                            <TextBlock Margin="10,2,0,2" Text="{Binding Path=Name}" Grid.Column="1"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </GroupStyle.HeaderTemplate>
+                            </GroupStyle>
+                        </ListBox.GroupStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="20,0,0,0" Text="{Binding Destination.Name, StringFormat=⇨ \{0\}}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Grid Grid.Row="1" Grid.Column="1" Margin="0,0,0,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Departure time:" VerticalContentAlignment="Center"/>
+                        
+                        <ComboBox DisplayMemberPath="ShortString" ItemsSource="{Binding TimesView}" IsSynchronizedWithCurrentItem="True" Margin="0,5,0,5" Grid.Row="1" Height="22.5" VerticalContentAlignment="Center"></ComboBox>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Button Content="Stops" Command="{Binding ManageStopCommand}" Margin="0,0,5,0"/>
+                        <Button Grid.Column="1" Content="Lines" Command="{Binding ManageLineCommand}" Margin="5,0,0,0"/>
+                    </Grid>
+                </Grid>
+            </GroupBox>
+            <GroupBox Grid.Row="1" Header="Options">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Start stop:" VerticalContentAlignment="Center"></Label>
+                    <ComboBox DisplayMemberPath="Stop.Name" ItemsSource="{Binding EntryStopsView}" IsSynchronizedWithCurrentItem="True" Grid.Column="1" Margin="0,5,0,5" Height="22.5" VerticalContentAlignment="Center"></ComboBox>
+
+                    <Label Grid.Row="1" Content="Start time:" VerticalContentAlignment="Center"/>
+                    <xc:DateTimeUpDown Value="{Binding SelectedStartTime}" Grid.Row="1" Grid.Column="1" Margin="0,5,0,5" Height="22.5" VerticalContentAlignment="Center" Format="ShortTime"/>
+                </Grid>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:BusSimulator.Ui.Components">
+    <SolidColorBrush x:Key="BackgroundBrush" Color="#1D3957"/>
+    
+    <SolidColorBrush x:Key="ListBackgroundBrush" Color="#FF254A72"/>
+    <SolidColorBrush x:Key="LineDisplayBackgroundBrush" Color="Black"/>
+    
+    <SolidColorBrush x:Key="InformationForegroundBrush" Color="White"/>
+    <SolidColorBrush x:Key="InformationBadgeBackgroundBrush" Color="White"/>
+    
+    <SolidColorBrush x:Key="LineDisplayForegroundGreenBrush" Color="#FF2ACA2A"/>
+    <SolidColorBrush x:Key="LineDisplayForegroundYellowBrush" Color="#FFF7E317"/>
+    <SolidColorBrush x:Key="LineDisplayForegroundOrangeBrush" Color="#FFFFAE00"/>
+    <SolidColorBrush x:Key="LineDisplayForegroundWhiteBrush" Color="#FFEEEEEE"/>
+    <SolidColorBrush x:Key="LineDisplayForegroundLightBlueBrush" Color="#FFCAF8FF"/>
+    
+    <SolidColorBrush x:Key="LineRunBackgroundBrush" Color="#FFA72D2D"/>
+</ResourceDictionary>
