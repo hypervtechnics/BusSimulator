@@ -52,7 +52,7 @@ namespace BusSimulator.Core.Models
                 }
 
                 var finalDirectionString = string.Empty;
-                if (forwardString != string.Empty && backwardString != string.Empty)
+                if (forwardString.Length > 0 && backwardString.Length > 0)
                 {
                     if ((forwardDestination.Id == backwardOrigin.Id && forwardOrigin.Id == backwardDestination.Id)
                         || (forwardDestination.Id == backwardDestination.Id && forwardOrigin.Id == backwardOrigin.Id))
@@ -64,7 +64,7 @@ namespace BusSimulator.Core.Models
                         finalDirectionString = forwardString + " & " + backwardString;
                     }
                 }
-                else if (forwardString != string.Empty && backwardString == string.Empty)
+                else if (forwardString.Length > 0 && backwardString.Length == 0)
                 {
                     finalDirectionString = forwardString;
                 }

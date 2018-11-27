@@ -9,9 +9,9 @@ namespace BusSimulator.Core.DataAccess
 {
     public class LineDataAccess : BaseDataAccess<Line>, ILineDataAccess
     {
-        private readonly StopDataAccess stopDa;
+        private readonly IStopDataAccess stopDa;
 
-        public LineDataAccess(IDataRepository repository, StopDataAccess stopDa) : base(repository, repo => repo.Lines)
+        public LineDataAccess(IDataRepository repository, IStopDataAccess stopDa) : base(repository, repo => repo.Lines)
         {
             this.stopDa = stopDa;
         }

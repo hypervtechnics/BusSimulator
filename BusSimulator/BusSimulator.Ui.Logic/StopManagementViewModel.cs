@@ -28,6 +28,7 @@ namespace BusSimulator.Ui.Logic
 
             this.Stops = new ObservableCollection<Stop>(this.stopDataAccess.GetAll());
             this.StopsView = CollectionViewSource.GetDefaultView(this.Stops);
+            this.StopsView.SortDescriptions.Add(new SortDescription(nameof(Stop.Name), ListSortDirection.Ascending));
 
             this.InitializeCommands();
         }

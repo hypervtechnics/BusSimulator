@@ -1,4 +1,5 @@
-﻿using BusSimulator.Core.DataAccess.Interfaces;
+﻿using BusSimulator.Core.Data.Interfaces;
+using BusSimulator.Core.DataAccess.Interfaces;
 using BusSimulator.Core.Extensions;
 using BusSimulator.Core.Logic.Abstractions;
 using BusSimulator.Core.Models;
@@ -19,11 +20,13 @@ namespace BusSimulator.Ui.Logic
     {
         private readonly ILineDataAccess lineDa;
         private readonly IScheduleService scheduleService;
+        private readonly IDataRepository dataRepository;
 
-        public MainViewModel(ILineDataAccess lineDa, IScheduleService scheduleService)
+        public MainViewModel(ILineDataAccess lineDa, IScheduleService scheduleService, IDataRepository dataRepository)
         {
             this.lineDa = lineDa;
             this.scheduleService = scheduleService;
+            this.dataRepository = dataRepository;
 
             this.InitializeCommands();
 
@@ -43,6 +46,12 @@ namespace BusSimulator.Ui.Logic
             this.EntryStopsView = CollectionViewSource.GetDefaultView(this.EntryStops);
             this.EntryStopsView.CurrentChanged += this.EntryStopsView_CurrentChanged;
 
+            this.InitializeMessenger();
+            this.InitializeLines();
+        }
+
+        private void InitializeMessenger()
+        {
             this.MessengerInstance.Register<RefreshDataMessage>(this, msg =>
             {
                 if (msg.Lines)
@@ -51,9 +60,10 @@ namespace BusSimulator.Ui.Logic
                 }
 
                 this.GeneratePreview();
-            });
 
-            this.InitializeLines();
+                //Save it to disk
+                this.dataRepository.Save();
+            });
         }
 
         #region Initialization

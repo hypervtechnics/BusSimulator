@@ -8,7 +8,7 @@
         xmlns:xc="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:BusSimulator.Ui"
         mc:Ignorable="d"
-        Title="Bus Simulator - Management - Lines" Height="750" Width="800" WindowStartupLocation="CenterScreen"
+        Title="Bus Simulator - Management - Lines" Height="800" Width="900" WindowStartupLocation="CenterScreen"
         DataContext="{Binding LineManagement, Source={StaticResource Locator}}">
     <Window.Resources>
         <Style TargetType="{x:Type Label}">
@@ -139,7 +139,7 @@
                         <Label Content="Afterwards traveltime:" Grid.Column="2"/>
                         <xc:IntegerUpDown Value="{Binding ScheduleView.CurrentItem.AfterTravelForTime}" VerticalContentAlignment="Center" MinWidth="70" Margin="0,0,5,0" Height="23" Grid.Column="3" Minimum="0"/>
 
-                        <Button Command="{Binding ReverseDownCommand}" Content="Reverse other direction" Grid.Column="5" Padding="4,1"/>
+                        <Button Command="{Binding ReverseCommand}" Content="Reverse other direction" Grid.Column="5" Padding="4,1"/>
                     </Grid>
                     
                     <Grid Grid.Row="2" Margin="0,5,0,0">

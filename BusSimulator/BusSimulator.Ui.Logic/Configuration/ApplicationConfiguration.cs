@@ -1,4 +1,5 @@
-﻿using BusSimulator.Core.Models;
+﻿using BusSimulator.Core.Configuration;
+using BusSimulator.Core.Models;
 
 namespace BusSimulator.Ui.Logic.Configuration
 {
@@ -6,12 +7,17 @@ namespace BusSimulator.Ui.Logic.Configuration
     {
         public ApplicationConfiguration()
         {
+            this.JsonDataConfiguration = new JsonDataConfiguration();
+
             this.Overlay = new OverlayConfiguration();
             this.KeyBinding = new KeyBindingConfiguration();
 
             this.SimulationBehaviour = new SimulationBehaviourOptions();
             this.SimulationDisplay = new SimulationDisplayOptions();
         }
+
+        public JsonDataConfiguration JsonDataConfiguration { get; set; }
+
 
         public OverlayConfiguration Overlay { get; set; }
 

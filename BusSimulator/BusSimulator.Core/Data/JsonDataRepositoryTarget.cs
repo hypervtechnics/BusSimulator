@@ -3,15 +3,18 @@ using BusSimulator.Core.Data.Interfaces;
 
 namespace BusSimulator.Core.Data
 {
-    public class JsonDataRepositoryTarget : JsonDataRepository, IDataRepositoryTarget
+    public class JsonDataRepositoryTarget : IDataRepositoryTarget
     {
-        public JsonDataRepositoryTarget(string filename) : base(filename)
+        private readonly JsonDataConfiguration jsonDataConfiguration;
+
+        public JsonDataRepositoryTarget(JsonDataConfiguration jsonDataConfiguration)
         {
+            this.jsonDataConfiguration = jsonDataConfiguration;
         }
 
         public void Save(DataRepository dataRepository)
         {
-            JsonApplicationConfiguration.Save(this.filename, dataRepository);
+            JsonApplicationConfiguration.Save(this.jsonDataConfiguration.JsonDataRepositoryFile, dataRepository);
         }
     }
 }

@@ -1,22 +1,23 @@
 ﻿
-using Ninject;
+using DryIoc;
 
 namespace BusSimulator.Ui.Logic
 {
     public class ViewModelLocator
     {
-        private readonly IKernel kernel;
+        private readonly IContainer container;
 
         public ViewModelLocator()
         {
-            this.kernel = new StandardKernel(new IocModule());
+            this.container = new Container();
+            IocModule.Load(this.container);
         }
 
         public AboutViewModel About
         {
             get
             {
-                return this.kernel.Get<AboutViewModel>();
+                return this.container.Resolve<AboutViewModel>();
             }
         }
 
@@ -24,7 +25,7 @@ namespace BusSimulator.Ui.Logic
         {
             get
             {
-                return this.kernel.Get<SettingsViewModel>();
+                return this.container.Resolve<SettingsViewModel>();
             }
         }
 
@@ -32,7 +33,7 @@ namespace BusSimulator.Ui.Logic
         {
             get
             {
-                return this.kernel.Get<MainViewModel>();
+                return this.container.Resolve<MainViewModel>();
             }
         }
 
@@ -40,7 +41,7 @@ namespace BusSimulator.Ui.Logic
         {
             get
             {
-                return this.kernel.Get<LineManagementViewModel>();
+                return this.container.Resolve<LineManagementViewModel>();
             }
         }
 
@@ -48,7 +49,7 @@ namespace BusSimulator.Ui.Logic
         {
             get
             {
-                return this.kernel.Get<StopManagementViewModel>();
+                return this.container.Resolve<StopManagementViewModel>();
             }
         }
 
@@ -56,7 +57,7 @@ namespace BusSimulator.Ui.Logic
         {
             get
             {
-                return this.kernel.Get<DriveViewModel>();
+                return this.container.Resolve<DriveViewModel>();
             }
         }
     }

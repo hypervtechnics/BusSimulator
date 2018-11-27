@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BusSimulator.Ui"
         xmlns:locald="clr-namespace:BusSimulator.Ui.Dialogs"
         mc:Ignorable="d"
-        Title="Bus Simulator - Management - Stops" Height="300" Width="450" WindowStartupLocation="CenterScreen"
+        Title="Bus Simulator - Management - Stops" Height="500" Width="600" WindowStartupLocation="CenterScreen"
         DataContext="{Binding StopManagement, Source={StaticResource Locator}}">
     <Grid>
         <Grid.RowDefinitions>
@@ -14,8 +14,8 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
         <Grid>
@@ -67,7 +67,7 @@
             <CheckBox IsChecked="{Binding SelectedStop.IsMajor}" Grid.Row="2" Grid.Column="1" Content="Major" Margin="0,2,5,2"/>
 
             <Label Content="Lines" Grid.Row="3" Grid.ColumnSpan="2" FontWeight="Bold" VerticalContentAlignment="Center"/>
-            <ListBox Margin="5,2,5,5" ItemsSource="{Binding StoppingLines}" Grid.ColumnSpan="2" Grid.Row="4" DisplayMemberPath="LineSummary"/>
+            <ListBox Margin="5,2,5,5" BorderThickness="0" ItemsSource="{Binding StoppingLines}" Grid.ColumnSpan="2" Grid.Row="4" DisplayMemberPath="LineSummary"/>
         </Grid>
 
         <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="#FFF0F0F0">

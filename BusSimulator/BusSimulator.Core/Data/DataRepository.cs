@@ -9,10 +9,6 @@ namespace BusSimulator.Core.Data
 {
     public class DataRepository : IDataRepository
     {
-        public DataRepository()
-        {
-        }
-
         [JsonIgnore]
         public IDataRepositoryTarget Target { get; set; }
 
